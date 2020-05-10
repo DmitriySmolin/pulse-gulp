@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showDetail({ target }) {
-    event.preventDefault();
     if (target.classList.contains('catalog-item__link')) {
+      event.preventDefault();
       toggleSlide(
         target,
         target.parentNode.nextElementSibling,
@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (target.classList.contains('catalog-item__back')) {
+      event.preventDefault();
       toggleSlide(
         target,
         target.parentNode.previousElementSibling,
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalConsultation = document.getElementById('consultation');
   const modalOrder = document.getElementById('order');
   const modalDescr = document.querySelector('#order .modal__descr');
-  console.log(modalDescr);
+
   function showModal({ target }) {
     if (target.dataset.modal === 'consultation') {
       switchModalDisplay('block', modalConsultation);
@@ -130,4 +131,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.addEventListener('click', showModal);
   document.body.addEventListener('click', closeModal);
+
+  //validation forms
+  function validForms(form) {
+    $(form).validate({
+      rules: {
+        name: {
+          required: true,
+          minlength: 2,
+        },
+        phone: 'required',
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+      messages: {
+        name: {
+          required: 'Пожалуйста, введите ваше имя',
+          minlength: jQuery.validator.format(
+            'Поле  должно содержать не менее 2-х символов!'
+          ),
+        },
+        phone: 'Пожалуйста, введите ваш номер телефона',
+        email: {
+          required: 'Пожалуйста, введите вашу почту',
+          email: 'Неправильно введен адрес почты',
+        },
+      },
+    });
+  }
+
+  validForms('#consultation-form form');
+  validForms('#consultation form');
+  validForms('#order form');
 });
