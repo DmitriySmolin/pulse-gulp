@@ -165,4 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
   validForms('#consultation-form form');
   validForms('#consultation form');
   validForms('#order form');
+
+  //maskedInput
+  $('input[name=phone]').mask('+7 (999) 999-99-99');
 });
