@@ -200,4 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     return false;
   });
+
+  //wow.js init
+  new WOW().init();
 });
